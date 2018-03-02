@@ -10,7 +10,7 @@ type Query {
 const resolvers = {
     Query: {
         hi() {
-            return "Hello Level Up";
+            return "Hello Level Up...";
         }
     }
 };
