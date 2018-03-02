@@ -1,7 +1,10 @@
 import { createApolloServer } from 'meteor/apollo';
 import { makeExecutableSchema } from 'graphql-tools';
+import merge from 'lodash/merge';
+
 
 import ResolutionsSchema from '../../api/resolutions/Resolutions.graphql';
+import ResolutionsResolvers from '../../api/resolutions/resolvers';
 
 const testSchema = `
 type Query {
@@ -15,25 +18,18 @@ const typeDefs = [
     ResolutionsSchema
 ];
 
-const resolvers = {
+const testtResolvers = {
     Query: {
         hi() {
             return "Hello Level Up...";
-        },
-        resolutions() {
-            return [
-                {
-                    _id: "iusahdiusahduiashda",
-                    name: "Get stuff done!"
-                },
-                {
-                    _id: "iadssausahduiashda",
-                    name: "Get stuff done 2 !"
-                }
-            ];
         }
     }
 };
+
+
+const resolvers = merge(testtResolvers, ResolutionsResolvers);
+
+console.log(resolvers);
 
 const schema = makeExecutableSchema({
     typeDefs,
