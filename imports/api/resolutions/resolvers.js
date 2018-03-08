@@ -13,11 +13,10 @@ export default {
     },
 
     Mutation: {
-        createResolution() {
-            console.log("got here");
-        //    const resolutionId = Resolutions.insert({
-        //         name: "Thiago Marinho"
-        //    });
+        createResolution(obj, { name } , context) {
+            console.log(name);
+            const resolutionId = Resolutions.insert({name});
+            return Resolutions.findOne(resolutionId);
         }
     }
 };
