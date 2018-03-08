@@ -18,7 +18,7 @@ const typeDefs = [
     ResolutionsSchema
 ];
 
-const testtResolvers = {
+const testResolvers = {
     Query: {
         hi() {
             return "Hello Level Up...";
@@ -27,7 +27,7 @@ const testtResolvers = {
 };
 
 
-const resolvers = merge(testtResolvers, ResolutionsResolvers);
+const resolvers = merge(testResolvers, ResolutionsResolvers);
 
 console.log(resolvers);
 
