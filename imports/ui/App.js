@@ -7,16 +7,23 @@ import LoginForm from './LoginForm';
 import { withApollo } from 'react-apollo';
 
 
-const App = ({ loading, resolutions, client }) => {
+const App = ({ loading, resolutions, client, user }) => {
   if(loading) return null;
   return (
   <div>
-    <button onClick={() => {
-      Meteor.logout()
-      client.resetStore();
-      }}>Logout</button>
-    <RegisterForm client={client}/>
-    <LoginForm client={client}/>
+    { user.id ? (
+      <button onClick={() => {
+        Meteor.logout()
+        client.resetStore();
+        }}>
+      Logout
+      </button>
+    ) : (
+      <div>
+        <RegisterForm client={client}/>
+        <LoginForm client={client}/>
+      </div>
+    )}
     <ResolutionForm />
      <ul>
       {resolutions.map(resolution => (
@@ -30,10 +37,12 @@ const App = ({ loading, resolutions, client }) => {
 
 const resolutionQuery = gql`
   query Resolutions {
-    hi
     resolutions {
       _id
       name
+    }
+    user {
+      _id
     }
 }
 `;
