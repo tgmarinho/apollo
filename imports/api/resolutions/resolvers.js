@@ -1,14 +1,13 @@
 import Resolutions from './resolutions';
 
 
-const res = Resolutions.find({}).fetch();
-console.log(res);
-
-
 export default {
     Query: {
-        resolutions() {
-            return Resolutions.find({}).fetch();
+        resolutions(obj, args, {userId}) {
+            console.log(userId);
+            return Resolutions.find({
+                userId
+            }).fetch();
         }
     },
 
