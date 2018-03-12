@@ -11,7 +11,7 @@ const App = ({ loading, resolutions, client, user }) => {
   if(loading) return null;
   return (
   <div>
-    { user.id ? (
+    { user._id ? (
       <button onClick={() => {
         Meteor.logout()
         client.resetStore();
@@ -43,6 +43,7 @@ const resolutionQuery = gql`
     }
     user {
       _id
+      
     }
 }
 `;

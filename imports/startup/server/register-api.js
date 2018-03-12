@@ -4,8 +4,9 @@ import merge from 'lodash/merge';
 
 import ResolutionsSchema from '../../api/resolutions/Resolutions.graphql';
 import ResolutionsResolvers from '../../api/resolutions/resolvers';
-import UsersSchema from '../../api/users/Users.graphql';
+import UsersSchema from '../../api/users/User.graphql';
 import UsersResolvers from '../../api/users/resolvers';
+
 
 
 
