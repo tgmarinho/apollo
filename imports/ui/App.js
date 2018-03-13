@@ -1,11 +1,12 @@
 import React from 'react';
 import gql from 'graphql-tag';
 import { graphql } from 'react-apollo';
-import ResolutionForm from './ResolutionForm';
-import RegisterForm  from './RegisterForm';
-import GoalForm  from './GoalForm';
-import LoginForm from './LoginForm';
 import { withApollo } from 'react-apollo';
+import ResolutionForm from './ResolutionForm';
+import GoalForm  from './GoalForm';
+import RegisterForm  from './RegisterForm';
+import LoginForm from './LoginForm';
+import Goal from './resolutions/Goal';
 
 
 
@@ -29,7 +30,13 @@ const App = ({ loading, resolutions, client, user }) => {
     <ResolutionForm />
      <ul>
       {resolutions.map(resolution => (
-        <li key={resolution._id}>{resolution.name}
+        <li key={resolution._id}>
+          {resolution.name}
+          <ul>
+            {resolution.goals.map(goal => (
+              <Goal goal={goal} key={goal._id} />
+            ))}
+          </ul>
           <GoalForm resolutionId={resolution._id}/>
         </li>
       ))}
@@ -44,6 +51,10 @@ const resolutionQuery = gql`
     resolutions {
       _id
       name
+      goals {
+        _id
+        name
+      }
     }
     user {
       _id
@@ -55,5 +66,3 @@ const resolutionQuery = gql`
 export default graphql(resolutionQuery, {
   props: ({data}) => ({... data})
 })(withApollo(App));
-
-// export default withApollo(LoginForm);
