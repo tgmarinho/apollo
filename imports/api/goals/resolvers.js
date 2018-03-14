@@ -2,13 +2,16 @@ import Goals from "./goals";
 
 export default {
   Mutation: {
-    createGoal(obj, { name, resolutionId }) {
-      const goalId = Goals.insert({
-        name,
-        resolutionId,
-        completed: false
-      });
-      return Goals.findOne(goalId);
+    createGoal(obj, { name, resolutionId }, {userId}) {
+      if(userId){
+        const goalId = Goals.insert({
+          name,
+          resolutionId,
+          completed: false
+        });
+        return Goals.findOne(goalId);
+      }
+      throw new Error("Unauthorized");
     },
     toggleGoal(obj, { _id }) {
       const goal = Goals.findOne(_id);
